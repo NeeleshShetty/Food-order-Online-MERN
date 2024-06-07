@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "@/lib"],
+  "include": ["src", "@/lib", "src/components/ui/sonner.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
