@@ -5,12 +5,42 @@ import { Restaurant } from "../types";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+export const useGetMyRestaurant = () => {
+  const { getAccessTokenSilently } = useAuth0();
 
+  const getMyRestaurantRequest = async (): Promise<Restaurant> => {
+    const accessToken = await getAccessTokenSilently();
+
+    const response = await fetch(`${API_BASE_URL}/api/my/restaurant`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to get the restaurant");
+    }
+
+    return response.json();
+  };
+
+  const {
+    data: restaurant,
+    isLoading,
+  } = useQuery("fetchMyRestaurant", getMyRestaurantRequest);
+
+
+  return { restaurant, isLoading };
+};
 
 export const useCreateMyRestaurant = () => {
   const { getAccessTokenSilently } = useAuth0();
 
-  const createMyRestaurantRequest = async (restaurantFormData: FormData):Promise<Restaurant> => {
+  const createMyRestaurantRequest = async (
+    restaurantFormData: FormData
+  ): Promise<Restaurant> => {
     const accessToken = await getAccessTokenSilently();
 
     const response = await fetch(`${API_BASE_URL}/api/my/restaurant`, {
@@ -35,13 +65,12 @@ export const useCreateMyRestaurant = () => {
     error,
   } = useMutation(createMyRestaurantRequest);
 
-
-  if(isSuccess){
-    toast.success("Restaurant created")
+  if (isSuccess) {
+    toast.success("Restaurant created");
   }
-  if(error){
-    toast.error("Unable to create restaurant")
+  if (error) {
+    toast.error("Unable to create restaurant");
   }
 
-  return {isLoading,createRestaurant}
+  return { isLoading, createRestaurant };
 };
