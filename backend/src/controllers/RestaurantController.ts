@@ -5,7 +5,7 @@ const searchRestaurant = async (req: Request, res: Response) => {
   try {
     const city = req.params.city;
 
-    const searchQuery = (req.params.searchQuery as string) || "";
+    const searchQuery = (req.query.searchQuery as string) || "";
 
     const selectedCuisines = (req.query.selectedCuisines as string) || "";
 
