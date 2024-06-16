@@ -25,19 +25,24 @@ const SearchBar = ({ onSubmit, placeholder, onReset }: Props) => {
     resolver: zodResolver(formSchema),
   });
 
-  const handleReset = ()=>{
+  const handleReset = () => {
     form.reset({
-        searchQuery:""
-    })
+      searchQuery: "",
+    });
 
-    if(onReset){
-        onReset()
+    if (onReset) {
+      onReset();
     }
-  }
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className={`flex items-center flex-1 gap-3 justify-between flex-row border-2 rounded-full p-3 mx-5 ${form.formState.errors.searchQuery && "border-red-500"}`}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={`flex items-center flex-1 gap-3 justify-between flex-row border-2 rounded-full p-3 mx-5 ${
+          form.formState.errors.searchQuery && "border-red-500"
+        }`}
+      >
         <Search
           strokeWidth={2.5}
           size={30}
@@ -58,9 +63,20 @@ const SearchBar = ({ onSubmit, placeholder, onReset }: Props) => {
             </FormItem>
           )}
         />
-        {form.formState.isDirty && (<Button onClick={handleReset} type="button" variant={"outline"} className="rounded-full">Clear</Button>)}
+        {form.formState.isDirty && (
+          <Button
+            onClick={handleReset}
+            type="button"
+            variant={"outline"}
+            className="rounded-full"
+          >
+            Clear
+          </Button>
+        )}
 
-        <Button type="submit" className="text-white bg-orange-500">Search</Button>
+        <Button type="submit" className="text-white bg-orange-500">
+          Search
+        </Button>
       </form>
     </Form>
   );

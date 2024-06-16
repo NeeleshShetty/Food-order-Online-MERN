@@ -20,12 +20,12 @@ const searchRestaurant = async (req: Request, res: Response) => {
 
     if (cityCheck === 0) {
       return res.status(404).json({
-        data:[],
-        pagination:{
-            total:0,
-            page:1,
-            pages:1
-        }
+        data: [],
+        pagination: {
+          total: 0,
+          page: 1,
+          pages: 1,
+        },
       });
     }
 
@@ -55,24 +55,24 @@ const searchRestaurant = async (req: Request, res: Response) => {
       .limit(pageSize)
       .lean();
 
-      const total = await Restaurant.countDocuments(query)
+    const total = await Restaurant.countDocuments(query);
 
-      const response = {
-        data:restaurants,
+    const response = {
+      data: restaurants,
+      pagination: {
         total,
         page,
-        pages:Math.ceil(total/pageSize)
-      }
+        pages: Math.ceil(total / pageSize),
+      },
+    };
 
-      res.json(response)
-
+    res.json(response);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Something Went Wrong" });
   }
 };
 
-
 export default {
-    searchRestaurant
-}
+  searchRestaurant,
+};
