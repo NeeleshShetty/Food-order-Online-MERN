@@ -56,6 +56,16 @@ const DetailPage = () => {
     });
   };
 
+  const removeFromCart = (cartItem:CartItem)=>{
+
+    setCartItems((prevCartItem)=> {
+      const updatedCartItems = prevCartItem.filter((item)=> item._id !== cartItem._id)
+
+    return updatedCartItems
+
+    })
+
+  }
   if (isLoading || !restaurant) {
     return <h1>Loading Restaurant...</h1>;
   }
@@ -83,7 +93,7 @@ const DetailPage = () => {
 
         <div className="">
           <Card>
-            <OrderSummary restaurant={restaurant} cartItems={cartItems} />
+            <OrderSummary restaurant={restaurant} cartItems={cartItems} removeFromCart={removeFromCart}/>
           </Card>
         </div>
       </div>
