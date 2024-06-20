@@ -24,7 +24,7 @@ const formSchema = z.object({
   city: z.string().min(1, "city is required"),
 });
 
-type UserFormData = z.infer<typeof formSchema>;
+export type UserFormData = z.infer<typeof formSchema>;
 
 type Props = {
   currentUser: User;
