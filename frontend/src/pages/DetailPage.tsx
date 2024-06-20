@@ -112,7 +112,10 @@ const DetailPage = () => {
           <Card>
             <OrderSummary restaurant={restaurant} cartItems={cartItems} removeFromCart={removeFromCart}/>
             <CardFooter>
-              <CheckoutButton onCheckOut={onCheckOut} disabled={cartItems.length === 0} />
+            <CheckoutButton
+                disabled={cartItems.length === 0}
+                onCheckOut={onCheckOut}
+              />
             </CardFooter>
           </Card>
         </div>

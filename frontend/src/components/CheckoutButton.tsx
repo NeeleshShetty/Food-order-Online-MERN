@@ -8,7 +8,7 @@ import { useGetMyUser } from "../api/MyUserApi";
 
 type Props = {
     onCheckOut : (userFormData:UserFormData)=> void;
-    disabled:false;
+    disabled:boolean;
 
 }
 
@@ -54,6 +54,8 @@ const CheckoutButton = ({onCheckOut,disabled}:Props) => {
           currentUser={currentUser}
           onSave={onCheckOut}
           isLoading={isGetUserLoading}
+          title="Confirm Delivery Details"
+          buttonText="Continue to payment"
         />
       </DialogContent>
     </Dialog>
