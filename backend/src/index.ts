@@ -5,6 +5,7 @@ import mongoose from "mongoose"
 import myUserRoute from './routes/MyUserRoutes'
 import myRestaurantRoute from './routes/MyRestaurantRoutes'
 import restaurantRoute from './routes/RestaurantRoute'
+import orderRoute from './routes/OrderRoutes'
 import {v2 as cloudinary} from 'cloudinary'
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
@@ -26,6 +27,7 @@ app.use(cors())
 app.use('/api/my/user',myUserRoute)
 app.use('/api/my/restaurant',myRestaurantRoute)
 app.use('/api/restaurant',restaurantRoute)
+app.use('/api/order',orderRoute)
 
 app.listen(7000,()=>{
     console.log("Server started on localhost:7000")
